@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Security & Validation
+permalink: /flows/security-validation/
 ---
 
 # Security & Validation

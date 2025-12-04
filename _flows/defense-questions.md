@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Defense Questions & Answers
+permalink: /flows/defense-questions/
 ---
 
 # Câu hỏi phản biện và trả lời

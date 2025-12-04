@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Backend API - Admin Verification
+permalink: /flows/backend-implementation-api/
 ---
 
 # Backend API - Admin Verification Endpoints

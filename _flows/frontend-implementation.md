@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Frontend Implementation
+permalink: /flows/frontend-implementation/
 ---
 
 # Frontend Implementation
