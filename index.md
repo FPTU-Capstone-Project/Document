@@ -46,7 +46,7 @@ Documentation này được tạo ra với mục đích:
 
 ## Main System Flows
 
-### [1. Account Verification & Activation Flow]({{ site.baseurl }}/flows/account-verification-activation/)
+### [1. Account Verification & Activation Flow](flows/account-verification-activation/)
 **Status**: ✅ Đã hoàn thành
 
 Chi tiết về quy trình:
@@ -57,7 +57,7 @@ Chi tiết về quy trình:
 - Kích hoạt tài khoản và gửi email thông báo
 - Người dùng đăng nhập và sử dụng dịch vụ
 
-**[➜ Xem chi tiết flow]({{ site.baseurl }}/flows/account-verification-activation/)**
+**[➜ Xem chi tiết flow](flows/account-verification-activation/)**
 
 ---
 
@@ -109,7 +109,7 @@ Cơ chế bảo mật, xác thực JWT, phân quyền RBAC, validation, và xử
 
 ## Cách sử dụng Documentation
 
-1. **Đọc từng Flow**: Bắt đầu từ [Account Verification & Activation](/flows/account-verification-activation/)
+1. **Đọc từng Flow**: Bắt đầu từ [Account Verification & Activation](flows/account-verification-activation/)
 2. **Hiểu nghiệp vụ trước**: Đọc phần Business Logic trước khi đi vào kỹ thuật
 3. **Xem code examples**: Tham khảo các đoạn code thực tế trong dự án
 4. **Chuẩn bị câu hỏi**: Đọc phần Defense Questions và luyện tập trả lời

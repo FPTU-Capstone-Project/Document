@@ -6,7 +6,7 @@ permalink: /flows/defense-questions/
 
 # Câu hỏi phản biện và trả lời
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan](../account-verification-activation/)
 
 ---
 

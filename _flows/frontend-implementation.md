@@ -6,7 +6,7 @@ permalink: /flows/frontend-implementation/
 
 # Frontend Implementation
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan](../account-verification-activation/)
 
 ---
 

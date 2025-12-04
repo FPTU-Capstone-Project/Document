@@ -6,7 +6,7 @@ permalink: /flows/security-validation/
 
 # Security & Validation
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan](../account-verification-activation/)
 
 ---
 

@@ -6,7 +6,7 @@ permalink: /flows/business-logic/
 
 # Chi tiết nghiệp vụ từng bước
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan](../account-verification-activation/)
 
 ---
 
