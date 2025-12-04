@@ -12,6 +12,12 @@ Tài liệu kỹ thuật toàn diện về hệ thống **Motorbike Sharing Syst
 
 **Truy cập tài liệu tại:** https://fptu-capstone-project.github.io/Document/
 
+> **Lưu ý:** Sau khi push code lên GitHub, cần enable GitHub Pages:
+> 1. Vào repository Settings → Pages
+> 2. Source: chọn "GitHub Actions" (hoặc "Deploy from a branch" → branch "main" → folder "/ (root)")
+> 3. Save và đợi vài phút để GitHub build
+> 4. Site sẽ live tại URL trên
+
 ## 📖 Nội dung chính
 
 ### 1. Account Verification & Activation Flow

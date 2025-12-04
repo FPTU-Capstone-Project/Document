@@ -5,7 +5,7 @@ description: >-
   Dự án Capstone tại FPT University, cung cấp phân tích nghiệp vụ, 
   kiến trúc kỹ thuật, và triển khai hệ thống.
 
-baseurl: "" 
+baseurl: "/Document" 
 url: "https://fptu-capstone-project.github.io"
 
 # Theme
