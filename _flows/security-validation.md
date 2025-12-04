@@ -589,4 +589,4 @@ public boolean isTokenValid(String token, UserDetails userDetails) {
 
 ---
 
-[← Quay lại tổng quan](../account-verification-activation/) | [Đọc tiếp: Câu hỏi phản biện →](../defense-questions)
+[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/) | [Đọc tiếp: Câu hỏi phản biện →]({{ site.baseurl }}/flows/defense-questions/)

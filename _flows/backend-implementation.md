@@ -5,7 +5,7 @@ title: Backend Implementation - Account Verification Flow
 
 # Backend Implementation Chi Tiết
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/)
 
 ---
 
@@ -656,4 +656,4 @@ public class ProfileServiceImpl implements ProfileService {
 
 ---
 
-[← Quay lại tổng quan](../) | [Tiếp tục đọc API Endpoints →](../backend-implementation-api)
+[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/) | [Tiếp tục đọc API Endpoints →]({{ site.baseurl }}/flows/backend-implementation-api/)

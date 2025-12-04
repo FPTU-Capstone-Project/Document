@@ -569,4 +569,4 @@ public class EmailServiceImpl implements EmailService {
 
 ---
 
-[← Quay lại Backend Implementation](../backend-implementation) | [Đọc tiếp: Security & Validation →](../security-validation)
+[← Quay lại Backend Implementation]({{ site.baseurl }}/flows/backend-implementation/) | [Đọc tiếp: Security & Validation →]({{ site.baseurl }}/flows/security-validation/)
