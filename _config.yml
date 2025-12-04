@@ -1,0 +1,52 @@
+# Site settings
+title: MSSUS System Documentation
+description: >-
+  Tài liệu kỹ thuật chi tiết về hệ thống chia sẻ xe máy dành cho sinh viên đại học.
+  Dự án Capstone tại FPT University, cung cấp phân tích nghiệp vụ, 
+  kiến trúc kỹ thuật, và triển khai hệ thống.
+
+baseurl: "" 
+url: "https://fptu-capstone-project.github.io"
+
+# Theme
+theme: minima
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  flows:
+    output: true
+    permalink: /flows/:path/
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Account Flow
+    url: /flows/account-verification-activation/
+  - title: GitHub
+    url: https://github.com/FPTU-Capstone-Project
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "flows"
+    values:
+      layout: "flow"
