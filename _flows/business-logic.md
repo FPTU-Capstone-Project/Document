@@ -854,4 +854,4 @@ PENDING → INACTIVE → ACTIVE/REJECTED
 
 ---
 
-[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/) | [Đọc tiếp: Backend Implementation →]({{ site.baseurl }}/flows/backend-implementation/)
+[← Quay lại tổng quan](../account-verification-activation/) | [Đọc tiếp: Backend Implementation →](../backend-implementation/)

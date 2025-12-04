@@ -817,4 +817,4 @@ query {
 
 ---
 
-[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/)
+[← Quay lại tổng quan](../account-verification-activation/)

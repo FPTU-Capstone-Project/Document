@@ -10,11 +10,11 @@ permalink: /flows/account-verification-activation/
 
 ### Phần chính
 1. [**Tổng quan Flow**](#tổng-quan-flow) - Giới thiệu và 5 bước chính
-2. [**Chi tiết nghiệp vụ từng bước**]({{ site.baseurl }}/flows/business-logic/) - Phân tích sâu business logic
-3. [**Technical Implementation - Backend**]({{ site.baseurl }}/flows/backend-implementation/) - Code, API, Database
-4. [**Technical Implementation - Frontend**]({{ site.baseurl }}/flows/frontend-implementation/) - UI/UX, Forms, Upload
-5. [**Security & Validation**]({{ site.baseurl }}/flows/security-validation/) - Bảo mật và kiểm tra dữ liệu
-6. [**Câu hỏi phản biện & Trả lời**]({{ site.baseurl }}/flows/defense-questions/) - Chuẩn bị bảo vệ đồ án
+2. [**Chi tiết nghiệp vụ từng bước**](../business-logic/) - Phân tích sâu business logic
+3. [**Technical Implementation - Backend**](../backend-implementation/) - Code, API, Database
+4. [**Technical Implementation - Frontend**](../frontend-implementation/) - UI/UX, Forms, Upload
+5. [**Security & Validation**](../security-validation/) - Bảo mật và kiểm tra dữ liệu
+6. [**Câu hỏi phản biện & Trả lời**](../defense-questions/) - Chuẩn bị bảo vệ đồ án
 
 ---
 
@@ -315,21 +315,21 @@ verifications table
 
 Bây giờ bạn đã hiểu tổng quan flow, hãy đọc từng phần chi tiết:
 
-### 📘 [Chi tiết nghiệp vụ từng bước →]({{ site.baseurl }}/flows/business-logic/)
+### 📘 [Chi tiết nghiệp vụ từng bước →](../business-logic/)
 Phân tích sâu business logic, validation rules, error handling cho từng bước
 
-### 🔧 [Backend Implementation →]({{ site.baseurl }}/flows/backend-implementation/)
+### 🔧 [Backend Implementation →](../backend-implementation/)
 Code examples, API endpoints, database schema, service layer, repository
 
-### 🎨 [Frontend Implementation →]({{ site.baseurl }}/flows/frontend-implementation/)
+### 🎨 [Frontend Implementation →](../frontend-implementation/)
 UI components, forms, file upload, admin dashboard, API integration
 
-### 🔒 [Security & Validation →]({{ site.baseurl }}/flows/security-validation/)
+### 🔒 [Security & Validation →](../security-validation/)
 JWT authentication, file validation, XSS prevention, SQL injection, CSRF
 
-### ❓ [Câu hỏi phản biện →]({{ site.baseurl }}/flows/defense-questions/)
+### ❓ [Câu hỏi phản biện →](../defense-questions/)
 50+ câu hỏi thường gặp khi bảo vệ đồ án và cách trả lời chuyên nghiệp
 
 ---
 
-[← Quay lại trang chủ]({{ site.baseurl }}/) | [Đọc tiếp: Business Logic →]({{ site.baseurl }}/flows/business-logic/)
+[← Quay lại trang chủ](../../) | [Đọc tiếp: Business Logic →](../business-logic/)

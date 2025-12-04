@@ -1007,4 +1007,4 @@ export interface Verification {
 
 ---
 
-[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/) | [Đọc tiếp: Security & Validation →]({{ site.baseurl }}/flows/security-validation/)
+[← Quay lại tổng quan](../account-verification-activation/) | [Đọc tiếp: Security & Validation →](../security-validation/)

@@ -6,7 +6,7 @@ permalink: /flows/backend-implementation/
 
 # Backend Implementation Chi Tiết
 
-[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/)
+[← Quay lại tổng quan](../account-verification-activation/)
 
 ---
 
@@ -657,4 +657,4 @@ public class ProfileServiceImpl implements ProfileService {
 
 ---
 
-[← Quay lại tổng quan]({{ site.baseurl }}/flows/account-verification-activation/) | [Tiếp tục đọc API Endpoints →]({{ site.baseurl }}/flows/backend-implementation-api/)
+[← Quay lại tổng quan](../account-verification-activation/) | [Tiếp tục đọc API Endpoints →](../backend-implementation-api/)
