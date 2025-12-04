@@ -1007,4 +1007,4 @@ export interface Verification {
 
 ---
 
-[← Quay lại tổng quan](../) | [Đọc tiếp: Security & Validation →](../security-validation)
+[← Quay lại tổng quan](../account-verification-activation/) | [Đọc tiếp: Security & Validation →](../security-validation)

@@ -817,4 +817,4 @@ query {
 
 ---
 
-[← Quay lại tổng quan](../)
+[← Quay lại tổng quan](../account-verification-activation/)

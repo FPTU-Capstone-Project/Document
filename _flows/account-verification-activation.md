@@ -332,4 +332,4 @@ JWT authentication, file validation, XSS prevention, SQL injection, CSRF
 
 ---
 
-[← Quay lại trang chủ](/) | [Đọc tiếp: Business Logic →](./business-logic)
+[← Quay lại trang chủ]({{ site.baseurl }}/) | [Đọc tiếp: Business Logic →](./business-logic)

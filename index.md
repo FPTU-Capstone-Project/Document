@@ -46,7 +46,7 @@ Documentation này được tạo ra với mục đích:
 
 ## Main System Flows
 
-### [1. Account Verification & Activation Flow](/flows/account-verification-activation/)
+### [1. Account Verification & Activation Flow]({{ site.baseurl }}/flows/account-verification-activation/)
 **Status**: ✅ Đã hoàn thành
 
 Chi tiết về quy trình:
@@ -57,7 +57,7 @@ Chi tiết về quy trình:
 - Kích hoạt tài khoản và gửi email thông báo
 - Người dùng đăng nhập và sử dụng dịch vụ
 
-**[➜ Xem chi tiết flow](/flows/account-verification-activation/)**
+**[➜ Xem chi tiết flow]({{ site.baseurl }}/flows/account-verification-activation/)**
 
 ---
 

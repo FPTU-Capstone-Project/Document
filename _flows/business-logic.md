@@ -854,4 +854,4 @@ PENDING → INACTIVE → ACTIVE/REJECTED
 
 ---
 
-[← Quay lại tổng quan](../) | [Đọc tiếp: Backend Implementation →](../backend-implementation)
+[← Quay lại tổng quan](../account-verification-activation/) | [Đọc tiếp: Backend Implementation →](../backend-implementation)
