@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Frontend Implementation
-permalink: /flows/account-verification-activation/frontend-implementation/
 ---
 
 # Frontend Implementation

@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Business Logic - Account Verification Flow
-permalink: /flows/account-verification-activation/business-logic/
 ---
 
 # Chi tiết nghiệp vụ từng bước

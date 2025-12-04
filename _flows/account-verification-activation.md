@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Account Verification & Activation Flow
-permalink: /flows/account-verification-activation/
 ---
 
 # Account Verification & Activation Flow

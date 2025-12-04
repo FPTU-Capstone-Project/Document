@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Backend Implementation - Account Verification Flow
-permalink: /flows/account-verification-activation/backend-implementation/
 ---
 
 # Backend Implementation Chi Tiết

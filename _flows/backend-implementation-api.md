@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Backend API - Admin Verification
-permalink: /flows/account-verification-activation/backend-implementation-api/
 ---
 
 # Backend API - Admin Verification Endpoints

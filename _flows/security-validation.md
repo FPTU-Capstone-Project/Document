@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Security & Validation
-permalink: /flows/account-verification-activation/security-validation/
 ---
 
 # Security & Validation
