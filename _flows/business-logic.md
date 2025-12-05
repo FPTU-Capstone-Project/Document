@@ -384,9 +384,9 @@ if (width < 800 || height < 600) {
    - Format: {user_id}_{type}_{timestamp}_{random}.{ext}
    - Example: 123_student_id_1701706800_abc123.jpg
    ↓
-3. Upload to Storage (S3 or local)
+3. Upload to Cloudinary storage (folder: motorbike/)
    ↓
-4. Get public URL
+4. Get public URL from Cloudinary
    ↓
 5. Save Verification record to database
    - type = STUDENT_ID

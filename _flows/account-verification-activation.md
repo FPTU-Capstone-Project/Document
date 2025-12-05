@@ -66,7 +66,7 @@ Flow **Account Verification & Activation** giải quyết bài toán quan trọn
 - Điền thông tin: Student ID, University, Major (nếu là sinh viên)
 
 **Kết quả:**
-- File ảnh được upload lên storage (AWS S3 hoặc local)
+- File ảnh được upload lên Cloudinary (cloud storage)
 - Tạo record trong bảng `verifications`:
   - `type` = `STUDENT_ID` (hoặc `DRIVER_LICENSE`)
   - `status` = `PENDING`
@@ -224,7 +224,7 @@ Flow **Account Verification & Activation** giải quyết bài toán quan trọn
 
 **Infrastructure:**
 - Docker containers
-- AWS S3 để lưu ảnh
+- Cloudinary để lưu ảnh (với folder `motorbike/`)
 - RabbitMQ cho async email (optional)
 
 ---
@@ -292,7 +292,7 @@ verifications table
 [User] --> (2) Verify Email --> [Backend] --> Update email_verified=true
                                            --> Status=PENDING
                                            
-[User] --> (3) Upload Documents --> [Backend] --> Save to S3
+[User] --> (3) Upload Documents --> [Backend] --> Save to Cloudinary
                                               --> Create Verification (status=PENDING)
                                               
 [Admin] --> (4) Review Request --> [Backend] --> Check documents

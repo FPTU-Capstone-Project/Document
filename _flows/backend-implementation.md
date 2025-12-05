@@ -28,13 +28,13 @@ Phần này giải thích **chi tiết kỹ thuật** về cách triển khai ba
 ### Tech Stack
 
 | Layer | Technology | Purpose |
-|-------|------------|---------|
+|-------|------------|---------||
 | **Framework** | Spring Boot 3.2 | REST API framework |
 | **Security** | Spring Security + JWT | Authentication & Authorization |
 | **Database** | PostgreSQL 15 | Relational data storage |
 | **ORM** | JPA + Hibernate | Object-relational mapping |
 | **Validation** | Jakarta Validation | Input validation |
-| **File Storage** | AWS S3 / Local | Document storage |
+| **File Storage** | Cloudinary | Document/image storage (cloud-based) |
 | **Email** | Spring Mail + Thymeleaf | Email templates |
 | **Logging** | SLF4J + Logback | Application logs |
 

@@ -372,8 +372,8 @@ public class FileUploadService {
                 // 6. Generate safe filename
                 String safeFilename = generateSafeFilename(file);
                 
-                // 7. Upload to storage
-                return uploadToS3(file, safeFilename);
+                // 7. Upload to Cloudinary
+                return uploadToCloudinary(file, safeFilename);
                 
             } catch (Exception e) {
                 throw new FileUploadException(

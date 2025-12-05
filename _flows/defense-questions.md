@@ -138,19 +138,210 @@ public class Verification {
 
 | Feature | JWT | Session |
 |---------|-----|---------|
-| **Scalability** | ✅ Stateless → dễ horizontal scale | ❌ Cần shared session store (Redis) |
-| **Microservices** | ✅ Self-contained → không cần call auth service | ❌ Mỗi request check session DB |
-| **Mobile app** | ✅ Token store dễ (localStorage) | ❌ Cookie không work tốt với mobile |
-| **Performance** | ✅ Không cần DB query mỗi request | ❌ Mỗi request query session table |
+| **Scalability** | ✅ **Stateless** - Server không lưu gì, chỉ verify signature → dễ horizontal scale | ❌ **Stateful** - Cần lưu session store (Redis/DB) → khó scale |
+| **Microservices** | ✅ Self-contained - JWT chứa user info → không cần call auth service | ❌ Mỗi service phải call session store để verify |
+| **Mobile app** | ✅ Token lưu localStorage client-side | ❌ Cookie-based, khó quản lý trên mobile |
+| **Performance** | ✅ Server chỉ verify signature (CPU-bound, nhanh) | ❌ Mỗi request query session table (I/O-bound, chậm) |
+
+---
+
+**🔐 Cơ chế JWT Signature Verification (Chi tiết):**
+
+**1. Cấu trúc JWT Token:**
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywicm9sZSI6IlVTRVIifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```
+
+Gồm 3 phần (ngăn cách bằng dấu `.`):
+
+```
+[HEADER].[PAYLOAD].[SIGNATURE]
+```
+
+- **HEADER** (base64 encoded): `{"alg":"HS256","typ":"JWT"}`
+- **PAYLOAD** (base64 encoded): `{"userId":123,"role":"USER","exp":1640000000}`
+- **SIGNATURE**: Chữ ký mật mã được tạo bằng HMAC-SHA256
+
+---
+
+**2. Server lưu gì? Client lưu gì?**
+
+| Lưu trữ | JWT Stateless | Session Stateful |
+|---------|---------------|------------------|
+| **Server lưu** | ✅ Chỉ lưu **SECRET_KEY** duy nhất (1 string, config môi trường) | ❌ Lưu từng session trong Redis/DB (millions records) |
+| **Client lưu** | ✅ Toàn bộ JWT token (header.payload.signature) | ❌ Chỉ session_id (random string) |
+| **Database records** | 0 records (không có bảng jwt_tokens) | 1 record/user online (bảng sessions) |
+
+---
+
+**3. Cơ chế tạo chữ ký (khi login):**
+
+```java
+// Server code (khi user login thành công)
+String secretKey = "a7f9c3e1b4d8f2a6c9e5b1d3f7a2c4e8"; // Lưu trong env
+
+// Step 1: Tạo header + payload
+String header = base64Encode('{"alg":"HS256","typ":"JWT"}');
+String payload = base64Encode('{"userId":123,"role":"USER","exp":1640000000}');
+
+// Step 2: Tạo chữ ký bằng HMAC-SHA256
+String dataToSign = header + "." + payload;
+String signature = HMAC_SHA256(dataToSign, secretKey);
+// signature = "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+
+// Step 3: Ghép thành JWT token hoàn chỉnh
+String jwtToken = header + "." + payload + "." + signature;
+
+// Trả về client
+return jwtToken; // Client lưu vào localStorage
+```
+
+**Quan trọng:** Server **KHÔNG** lưu token này vào database! Chỉ trả về cho client.
+
+---
+
+**4. Cơ chế kiểm tra chữ ký (mỗi request):**
+
+```java
+// Client gửi request với JWT trong header
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+// Server nhận token từ header
+String receivedToken = request.getHeader("Authorization").replace("Bearer ", "");
+
+// Step 1: Tách token thành 3 phần
+String[] parts = receivedToken.split("\\.");
+String receivedHeader = parts[0];    // từ client
+String receivedPayload = parts[1];   // từ client
+String receivedSignature = parts[2]; // từ client (CẦN VERIFY)
+
+// Step 2: Tính lại chữ ký bằng SECRET_KEY của server
+String secretKey = "a7f9c3e1b4d8f2a6c9e5b1d3f7a2c4e8"; // Đọc từ env
+String dataToSign = receivedHeader + "." + receivedPayload;
+String calculatedSignature = HMAC_SHA256(dataToSign, secretKey);
+
+// Step 3: So sánh chữ ký
+if (calculatedSignature.equals(receivedSignature)) {
+    // ✅ Token hợp lệ - chữ ký khớp
+    // Parse payload để lấy userId, role
+    String payloadJson = base64Decode(receivedPayload);
+    int userId = extractUserId(payloadJson);
+    // Cho phép request
+} else {
+    // ❌ Token giả mạo - chữ ký không khớp
+    return 401 Unauthorized;
+}
+```
+
+---
+
+**5. Tại sao không thể giả mạo token?**
+
+**Kịch bản tấn công:**
+
+```javascript
+// Hacker có token hợp lệ của user 123
+const validToken = "eyJhbGci....[payload: userId=123]....SflKxw";
+
+// Hacker decode payload, sửa userId thành 999
+const fakePayload = base64Encode('{"userId":999,"role":"ADMIN"}');
+
+// Hacker tạo fake token
+const fakeToken = header + "." + fakePayload + ".FAKE_SIGNATURE";
+```
+
+**Kết quả:**
+
+```java
+// Server verify
+String calculatedSignature = HMAC_SHA256(header + "." + fakePayload, secretKey);
+// calculatedSignature = "abc123xyz" (khác với FAKE_SIGNATURE)
+
+if (calculatedSignature.equals("FAKE_SIGNATURE")) {
+    // ❌ KHÔNG BAO GIỜ TRUE
+    // Vì hacker không có secretKey → không tạo được chữ ký đúng
+}
+
+return 401 Unauthorized; // Token bị reject
+```
+
+**Lý do:**
+- HMAC-SHA256 là **one-way hash function**
+- Cần **secretKey** để tạo chữ ký hợp lệ
+- Hacker **không có secretKey** (chỉ có server biết)
+- → Không thể tạo chữ ký khớp với server
+
+---
+
+**6. So sánh với Session:**
+
+| | JWT | Session |
+|---|-----|---------|
+| **Client gửi** | Toàn bộ token (header.payload.signature) | Chỉ session_id (random string) |
+| **Server verify** | Tính lại signature bằng SECRET_KEY → so sánh | Query database: `SELECT * FROM sessions WHERE id = 'abc123'` |
+| **Server cần** | SECRET_KEY (1 string cố định) | Session store (Redis/DB với millions records) |
+| **Có thể giả mạo?** | ❌ Không - cần SECRET_KEY để tạo signature | ❌ Không - cần guess session_id hợp lệ (random, khó đoán) |
+| **Scalability** | ✅ Stateless - không cần sync giữa servers | ❌ Stateful - cần Redis Cluster để sync sessions |
+
+---
+
+**7. Code thực tế trong project:**
+
+```java
+// JwtUtil.java
+public class JwtUtil {
+    
+    @Value("${jwt.secret}") // Load từ application.yml
+    private String SECRET_KEY; // Server chỉ lưu cái này!
+    
+    // Tạo token (khi login)
+    public String generateToken(User user) {
+        return Jwts.builder()
+            .setSubject(user.getEmail())
+            .claim("userId", user.getId())
+            .claim("role", user.getRole())
+            .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+            .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // Ký bằng SECRET_KEY
+            .compact();
+        // Không lưu vào database!
+    }
+    
+    // Verify token (mỗi request)
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser()
+                .setSigningKey(SECRET_KEY) // Dùng SECRET_KEY để verify
+                .parseClaimsJws(token); // Tự động tính lại signature và compare
+            return true; // Signature khớp
+        } catch (SignatureException e) {
+            // Signature không khớp → token giả mạo
+            return false;
+        }
+    }
+}
+```
+
+---
+
+**8. Tóm tắt:**
+
+✅ **Server lưu gì?** Chỉ SECRET_KEY (1 string trong environment variable)  
+✅ **Client lưu gì?** Toàn bộ JWT token (header.payload.signature)  
+✅ **Server verify như thế nào?** Tính lại signature bằng SECRET_KEY → so sánh với signature trong token  
+✅ **Tại sao không giả mạo được?** Vì không có SECRET_KEY → không tạo được signature hợp lệ  
+✅ **Stateless nghĩa là gì?** Server không lưu token vào database → không cần query DB mỗi request
 
 **Trade-offs:**
-- ❌ JWT cannot revoke (except token_version strategy)
-- ❌ JWT payload visible (chỉ encode, không encrypt)
+- ❌ JWT cannot revoke ngay lập tức (phải đợi expire hoặc dùng token_version strategy)
+- ❌ JWT payload visible (chỉ encode base64, không encrypt - anyone có token đều đọc được)
+- ❌ JWT size lớn hơn session_id (vì chứa user info)
 
 **Mitigation:**
-- Token expiration: 24 hours
-- Token version trong DB → revoke when change password
+- Token expiration: 24 hours (giảm window nếu bị leak)
+- Token version trong DB → revoke khi change password (trade-off: phải query DB)
 - HTTPS required → prevent token sniffing
+- Không lưu sensitive data trong JWT payload (password, credit card, etc.)
 
 ---
 
@@ -235,7 +426,7 @@ CompletableFuture.allOf(future1, future2, future3).join();
 
 **Rate limiting:**
 - Max 3 concurrent uploads/user (prevent abuse)
-- AWS S3 handles high throughput (11M requests/second)
+- Cloudinary handles high throughput với CDN tích hợp
 
 ---
 
@@ -603,7 +794,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 | POST /student-verifications | 2000ms | 10 req/s (file upload) |
 
 **Bottlenecks:**
-1. File upload: Limited by network bandwidth (AWS S3 upload 5-10 MB/s per connection)
+1. File upload: Limited by network bandwidth (Cloudinary upload ~5-10 MB/s per connection)
 2. Email sending: SMTP server limits (100 emails/minute)
 
 **Scaling plan:**
